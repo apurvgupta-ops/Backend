@@ -8,7 +8,7 @@ const {
   userPurchaseList,
   getAllUser,
 } = require("../controllers/user");
-const { isSignedIn, isAuthenticate, isAdmin } = require("../controllers/auth"); // for using middlewares and protected the routes
+const { isSignedIn, isAuthenticate, isAdmin } = require("../controllers/auth"); // for used as a middlewares and protected the routes
 
 router.param("userId", getUserById);
 router.get("/user/:userId", isSignedIn, isAuthenticate, getUser);
