@@ -17,6 +17,8 @@ router.param("userId", getUserById);
 router.param("categoryId", getCategoryById);
 
 //ACTUAL ROUTES
+
+//WRITE
 router.post(
   "/category/create/:userId",
   isSignedIn,
@@ -25,9 +27,11 @@ router.post(
   createCategory
 );
 
+//READ
 router.get("/categories", getAllCategory);
 router.get("/category/:categoryId", getcategory);
 
+//UPDATE
 router.put(
   "/category/:categoryId/:userId",
   isSignedIn,
@@ -36,6 +40,7 @@ router.put(
   updateCategory
 );
 
+//DELETE
 router.delete(
   "/category/:categoryId/:userId",
   isSignedIn,

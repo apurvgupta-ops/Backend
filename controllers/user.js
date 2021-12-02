@@ -1,6 +1,5 @@
 const User = require("../models/user");
 const Order = require("../models/order");
-const P
 
 exports.getUserById = (req, res, next, id) => {
   User.findById(id).exec((err, user) => {
@@ -15,7 +14,7 @@ exports.getUserById = (req, res, next, id) => {
 };
 
 exports.getUser = (req, res) => {
-  req.profile.salt = undefined; //we can do pass empty string also ""
+  req.profile.salt = undefined; //we can pass empty string also ""
   req.profile.encry_password = undefined;
   return res.json(req.profile);
 };
@@ -53,36 +52,35 @@ exports.userPurchaseList = (req, res) => {
 };
 
 //MIDDLEWARE
-exports.pushOrderInPurchaseList = (req,res,next)=>{
-  let purchases=[];
-  req.body.order.products.forEach(product=>{
+exports.pushOrderInPurchaseList = (req, res, next) => {
+  let purchases = [];
+  req.body.order.products.forEach((product) => {
     purchases.push({
-      _id:product._id,
-      name:product.name,
-      description:product.description,
-      category:product.category,
-      quantity:product.quantity,
-      amount:req.body.order.amount,
-      transaction_id:req.body.order.transaction_id
-    })
-  })
+      _id: product._id,
+      name: product.name,
+      description: product.description,
+      category: product.category,
+      quantity: product.quantity,
+      amount: req.body.order.amount,
+      transaction_id: req.body.order.transaction_id,
+    });
+  });
 
   //STORE THIS IN DATABASE
   User.findOneAndUpdate(
-    {_id:req.profile._id},
-    {$push:{purchases:purchases}},
-    {new:true},
-    (err,purchases)=>{
-      if(err){
+    { _id: req.profile._id },
+    { $push: { purchases: purchases } },
+    { new: true },
+    (err, purchases) => {
+      if (err) {
         return res.status(400).json({
-          error:"Unable to save puchase list" 
-        })
+          error: "Unable to save puchase list",
+        });
       }
-      next()
+      next();
     }
-  )
+  );
 };
-
 
 // exports.getAllUser = (req, res) => {
 //   User.find().exec((err, user) => {
