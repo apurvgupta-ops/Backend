@@ -3,9 +3,9 @@ const { validationResult } = require("express-validator");
 var jwt = require("jsonwebtoken");
 var expressjwt = require("express-jwt");
 
+//SIGNUP CONTROLLER
 exports.signUp = (req, res) => {
   // console.log("REQ BODY:", req.body);
-
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({
@@ -27,6 +27,7 @@ exports.signUp = (req, res) => {
   });
 };
 
+//SIGNIN CONTROLLER
 exports.signIn = (req, res) => {
   const { email, password } = req.body;
   const errors = validationResult(req);
@@ -57,6 +58,7 @@ exports.signIn = (req, res) => {
   });
 };
 
+//SIGNOUT CONTROLLER
 exports.signOut = (req, res) => {
   res.clearCookie("token");
   res.json({

@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const Order = require("../models/order");
 
+//GET USER BY ID
 exports.getUserById = (req, res, next, id) => {
   User.findById(id).exec((err, user) => {
     if (err || !user) {
@@ -13,12 +14,14 @@ exports.getUserById = (req, res, next, id) => {
   });
 };
 
+//GET USER
 exports.getUser = (req, res) => {
   req.profile.salt = undefined; //we can pass empty string also ""
   req.profile.encry_password = undefined;
   return res.json(req.profile);
 };
 
+//UPDATE USER
 exports.updateUser = (req, res) => {
   User.findByIdAndUpdate(
     { _id: req.profile._id },
@@ -37,6 +40,7 @@ exports.updateUser = (req, res) => {
   );
 };
 
+//USER IN THE PURCHASE LIST
 exports.userPurchaseList = (req, res) => {
   Order.find({ user: req.porfile._id })
     .populate("user", "_id name")

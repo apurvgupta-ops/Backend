@@ -9,10 +9,11 @@ const {
   getAllUser,
 } = require("../controllers/user");
 const { isSignedIn, isAuthenticate, isAdmin } = require("../controllers/auth"); // for used as a middlewares and protected the routes
-
+//PARAMETER ROUTE
 router.param("userId", getUserById);
+
+//READ ROUTE
 router.get("/user/:userId", isSignedIn, isAuthenticate, getUser);
-router.put("/user/:userId", isSignedIn, isAuthenticate, updateUser);
 router.get(
   "/orders/user/:userId",
   isSignedIn,
@@ -20,5 +21,8 @@ router.get(
   userPurchaseList
 );
 // router.get("/user", getAllUser);
+
+//UPDATE ROUTE
+router.put("/user/:userId", isSignedIn, isAuthenticate, updateUser);
 
 module.exports = router;
