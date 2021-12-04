@@ -5,7 +5,7 @@ const {
   getCategoryById,
   createCategory,
   getAllCategory,
-  getcategory,
+  getCategory,
   deleteCategory,
   updateCategory,
 } = require("../controllers/category");
@@ -29,7 +29,7 @@ router.post(
 
 //READ
 router.get("/categories", getAllCategory);
-router.get("/category/:categoryId", getcategory);
+router.get("/category/:categoryId", getCategory);
 
 //UPDATE
 router.put(
