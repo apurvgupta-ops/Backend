@@ -176,7 +176,7 @@ exports.updateInventory = (req, res, next) => {
       },
     };
   });
-  Product.bulkWrite(opertions, {}, (err, products) => {
+  Product.bulkWrite(operations, {}, (err, products) => {
     if (err) {
       return res.status(400).json({
         error: "bulk is failed",
