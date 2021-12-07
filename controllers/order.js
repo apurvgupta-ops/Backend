@@ -49,7 +49,7 @@ exports.getOrderStatus = (req, res) => {
 };
 
 //UPDATE ORDER
-exports.updateOrder = (req, res) => {
+exports.updateStatus = (req, res) => {
   Order.update(
     { _id: req.order._id },
     { $set: { status: req.body.status } },

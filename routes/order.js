@@ -4,9 +4,9 @@ const router = express.Router();
 const {
   getOrderById,
   createOrder,
-  getAllOrders,
+  getAllOrder,
   getOrderStatus,
-  updateOrder,
+  updateStatus,
 } = require("../controllers/order");
 const { isSignedIn, isAuthenticate, isAdmin } = require("../controllers/auth");
 const { getUserById, pushOrderInPurchaseList } = require("../controllers/user");
@@ -31,7 +31,7 @@ router.get(
   isSignedIn,
   isAuthenticate,
   isAdmin,
-  getAllOrders
+  getAllOrder
 );
 router.get(
   "/order/:orderId/status/:userId",
@@ -48,7 +48,7 @@ router.put(
   isSignedIn,
   isAuthenticate,
   isAdmin,
-  updateOrder
+  updateStatus
 );
 
 module.exports = router;
