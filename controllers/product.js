@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const Product = require("../models/product");
 const formidable = require("formidable");
 const _ = require("lodash");
@@ -7,11 +6,11 @@ const fs = require("fs");
 //GET PRODUCT BY ID
 exports.getProductById = (req, res, next, id) => {
   Product.findById(id)
-    .populate("category")
+    // .populate("category")
     .exec((err, product) => {
       if (err) {
         return res.status(400).json({
-          error: "No Product found",
+          error: "Product not found",
         });
       }
       req.product = product;
@@ -22,7 +21,7 @@ exports.getProductById = (req, res, next, id) => {
 //CREATE PRODUCT
 exports.createProduct = (req, res) => {
   let form = new formidable.IncomingForm();
-  form.keepExtension = true;
+  form.keepExtensions = true;
 
   form.parse(req, (err, fields, file) => {
     if (err) {
@@ -74,7 +73,7 @@ exports.getProduct = (req, res) => {
 //UPDATE PRODUCT
 exports.updateProduct = (req, res) => {
   let form = new formidable.IncomingForm();
-  form.keepExtension = true;
+  form.keepExtensions = true;
 
   form.parse(req, (err, fields, file) => {
     if (err) {
@@ -133,13 +132,13 @@ exports.getAllProducts = (req, res) => {
   let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
   Product.find()
     .select("-photo")
-    .populate("category")
+    // .populate("category")
     .sort([[sortBy, "asc"]])
     .limit(limit)
     .exec((err, products) => {
       if (err) {
         return res.status(400).json({
-          error: "Prodcuts are not showing",
+          error: "Products are not available",
         });
       }
       res.json(products);

@@ -26,7 +26,7 @@ exports.createCategory = (req, res) => {
   });
 };
 
-//GET ALL CATEGORY
+//GET ALL CATEGORIES
 exports.getAllCategory = (req, res) => {
   Category.find().exec((err, categories) => {
     if (err) {
@@ -38,6 +38,7 @@ exports.getAllCategory = (req, res) => {
   });
 };
 
+//GET A CATEGORY
 exports.getCategory = (req, res) => {
   return res.json(req.category);
 };
